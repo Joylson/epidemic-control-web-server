@@ -24,8 +24,17 @@ public class Initialization implements CommandLineRunner{
 		user.setLogin("joylson");
 		user.setName("Joylson");
 		user.setPassword(bCryptPasswordEncoder.encode("123456"));
-		user.setPerfis(Perfil.PROGRAMADOR);
+		user.addPerfil(Perfil.ADMIN);		
 		
+		User user1 = new User();
+		user1.setEmail("joylsont1@gmail.com");
+		user1.setLogin("joylson1");
+		user1.setName("Joylson1");
+		user1.setPassword(bCryptPasswordEncoder.encode("1234561"));
+		user1.addPerfil(Perfil.COPERADOR);		
+		
+		userRepository.save(user);
+		userRepository.save(user1);
 	}
 
 }

@@ -1,7 +1,7 @@
 package br.com.epidemic.enums;
 
 public enum Perfil {
-	SUPORTE("ROLE_SUPORTE"), PROGRAMADOR("ROLE_PROGRAMADOR");
+	ADMIN("ROLE_ADMIN"), USUARIO("ROLE_USUARIO"), COPERADOR("ROLE_COPERADOR");
 
 	private String descricao;
 

@@ -9,9 +9,9 @@ import lombok.Getter;
 public class SecurityConstants {
 	
 	@Value("${jwt.secret}") @Getter
-	private String secret = "tokenJJ";
+	private String secret;
 	@Value("${jwt.expiration}") @Getter
-	private long ExpirationTime = 7_200_000; 
+	private long ExpirationTime; 
 	public static final String TOKEN_PREFIX = "Bearer ";
 	public static final String HEADER_STRING = "Authorization";
 }

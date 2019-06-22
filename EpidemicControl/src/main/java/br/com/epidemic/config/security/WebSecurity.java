@@ -30,11 +30,14 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Autowired
 	private SecurityConstants constant;
+
+	private final String[] PUBLIC = { "/h2/**"};
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().disable().csrf().disable().headers().frameOptions().disable().and().authorizeRequests()
-		.anyRequest().permitAll()
+		.antMatchers(PUBLIC).permitAll()
+		.anyRequest().authenticated()
 		.and()
 		.addFilter(new JWTAuthenticationFilter(authenticationManager(), constant))
 		.addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService, constant))

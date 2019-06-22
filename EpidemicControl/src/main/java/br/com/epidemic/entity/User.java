@@ -24,6 +24,11 @@ import br.com.epidemic.enums.Perfil;
 import lombok.Data;
 
 
+interface ListAdd <E>{
+	boolean add(E e);
+}
+
+
 @Entity
 @Table(name = "user")
 @Data
@@ -45,8 +50,11 @@ public class User {
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Enumerated(EnumType.ORDINAL)
 	@CollectionTable(name = "perfil")
-	private Set<Perfil> perfis = new HashSet<>();
+	private  Set<Perfil> perfis = new HashSet<>();
 	
+	public void addPerfil(Perfil p) {
+		this.perfis.add(p);
+	}	
 
 	public UserDTO toDTO() {
 		ModelMapper map = new ModelMapper();
