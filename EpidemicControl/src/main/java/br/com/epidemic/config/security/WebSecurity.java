@@ -31,7 +31,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private SecurityConstants constant;
 
-	private final String[] PUBLIC = { "/h2/**"};
+	private final String[] PUBLIC = { "/h2/**", "/swagger-ui.html/**"};
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

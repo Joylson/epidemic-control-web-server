@@ -24,6 +24,7 @@ public class Initialization implements CommandLineRunner{
 		user.setLogin("joylson");
 		user.setName("Joylson");
 		user.setPassword(bCryptPasswordEncoder.encode("123456"));
+		user.setCpf("44877759816");
 		user.addPerfil(Perfil.ADMIN);		
 		
 		User user1 = new User();
@@ -31,6 +32,7 @@ public class Initialization implements CommandLineRunner{
 		user1.setLogin("joylson1");
 		user1.setName("Joylson1");
 		user1.setPassword(bCryptPasswordEncoder.encode("1234561"));
+		user1.setCpf("04052972031");
 		user1.addPerfil(Perfil.COPERADOR);		
 		
 		userRepository.save(user);

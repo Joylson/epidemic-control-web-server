@@ -19,6 +19,10 @@ public class UserService {
 		repository.findByLogin(user.getLogin()).ifPresent(u -> {
 			throw new BusinessException("Login ja cadastrado favor informa um novo!!");
 		});
+		
+		repository.findByCpf(user.getCpf()).ifPresent(u -> {
+			throw new BusinessException("CPF ja cadastrado favor informar um novo!!");
+		});
 
 		user.setId(0);
 		User u = repository.save(user);
@@ -27,7 +31,7 @@ public class UserService {
 
 	public User update(User user) {
 		if (user.getId() == 0) {
-			throw new BusinessException("Necessario informar ID!!");
+			throw new NullPointerException("Necessario informar ID!!");
 		}
 
 		repository.findById(user.getId())
@@ -46,7 +50,7 @@ public class UserService {
 
 	public void delete(long id) {
 		User u = repository.
-				findById(id).orElseThrow(() -> new NullPointerException("Usuario não encontrado"));
+				findById(id).orElseThrow(() -> new NullPointerException("Usuario não encontrado!!"));
 		
 		repository.delete(u);
 	}

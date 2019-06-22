@@ -30,7 +30,7 @@ interface ListAdd <E>{
 
 
 @Entity
-@Table(name = "user")
+@Table(name = "epidemic_user")
 @Data
 public class User {
 
@@ -46,10 +46,14 @@ public class User {
 	private String password;
 	@Column(name = "email", length = 50)
 	private String email;
+	@Column(name = "cpf", length = 20, nullable = false, unique = true)
+	private String cpf;
+	@Column(name = "phone", length = 20)
+	private String phone;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Enumerated(EnumType.ORDINAL)
-	@CollectionTable(name = "perfil")
+	@CollectionTable(name = "epidemic_perfil")
 	private  Set<Perfil> perfis = new HashSet<>();
 	
 	public void addPerfil(Perfil p) {

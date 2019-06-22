@@ -16,42 +16,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.epidemic.dto.UserDTO;
-import br.com.epidemic.entity.User;
-import br.com.epidemic.service.UserService;
+import br.com.epidemic.dto.EpidemicDTO;
+import br.com.epidemic.entity.Epidemic;
+import br.com.epidemic.service.EpidemicService;
 
 @RestController
-@RequestMapping("api/user")
-public class UserResource {
+@RequestMapping("api/epidemic")
+public class EpidemicResource {
 	
 	@Autowired
-	private UserService service;
+	private EpidemicService service;
 	
 	@GetMapping
-	public ResponseEntity<List<User>> get(){
-		List<User> users = service.findAll();
-		return ResponseEntity.ok(users);
+	public ResponseEntity<List<Epidemic>> get(){
+		List<Epidemic> Epidemics = service.findAll();
+		return ResponseEntity.ok(Epidemics);
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<User> get(@PathVariable("id") long id){
-		User u = service.findById(id);
-		return ResponseEntity.ok(u);
+	public ResponseEntity<Epidemic> get(@PathVariable("id") long id){
+		Epidemic ep = service.findById(id);
+		return ResponseEntity.ok(ep);
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> post(@Valid @RequestBody UserDTO dto){
-		User u = dto.toEntity();
-		u = service.save(u);
-		return ResponseEntity.ok(u);
+	public ResponseEntity<Epidemic> post(@Valid @RequestBody EpidemicDTO dto){
+		Epidemic ep = dto.toEntity();
+		ep = service.save(ep);
+		return ResponseEntity.ok(ep);
 	}
 	
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<User> put(@Valid @RequestBody UserDTO dto, @PathVariable("id") long id){
-		User u = dto.toEntity();
-		u.setId(id);
-		u = service.update(u);
-		return ResponseEntity.ok(u);
+	public ResponseEntity<Epidemic> put(@Valid @RequestBody EpidemicDTO dto, @PathVariable("id") long id){
+		Epidemic ep = dto.toEntity();
+		ep.setId(id);
+		ep = service.update(ep);
+		return ResponseEntity.ok(ep);
 	}
 	
 	@DeleteMapping(path = "/{id}")
