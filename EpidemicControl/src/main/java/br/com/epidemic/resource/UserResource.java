@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,8 @@ public class UserResource {
 	
 	@Autowired
 	private UserService service;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@GetMapping
 	public ResponseEntity<List<User>> get(){
@@ -41,6 +44,7 @@ public class UserResource {
 	
 	@PostMapping
 	public ResponseEntity<User> post(@Valid @RequestBody UserDTO dto){
+		dto.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
 		User u = dto.toEntity();
 		u = service.save(u);
 		return ResponseEntity.ok(u);

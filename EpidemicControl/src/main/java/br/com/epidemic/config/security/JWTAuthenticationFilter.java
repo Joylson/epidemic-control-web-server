@@ -28,7 +28,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	private AuthenticationManager authentication;
 	private SecurityConstants constants;
 
-	public JWTAuthenticationFilter(AuthenticationManager authentication, SecurityConstants constants) throws AuthenticationException {
+	public JWTAuthenticationFilter(AuthenticationManager authentication, SecurityConstants constants)
+			throws AuthenticationException {
 		setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());
 		this.authentication = authentication;
 		this.constants = constants;
@@ -53,7 +54,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		String token = JWT.create().withSubject(((UserDetailsImpl) authResult.getPrincipal()).getUsername())
 				.withExpiresAt(new Date(System.currentTimeMillis() + constants.getExpirationTime()))
 				.sign(Algorithm.HMAC512(constants.getSecret().getBytes()));
-		response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
+		response.setStatus(200);
+		response.setContentType("application/json");
+		response.getWriter().append(jsonToken(SecurityConstants.TOKEN_PREFIX + token, ((UserDetailsImpl) authResult.getPrincipal()).getId()));
+	}
+
+	private String jsonToken(String token, long id) {
+		return "{\"" + SecurityConstants.HEADER_STRING + "\": \"" + token + "\", \"id\" : \"" + id + "\"}";
 	}
 
 	private class JWTAuthenticationFailureHandler implements AuthenticationFailureHandler {

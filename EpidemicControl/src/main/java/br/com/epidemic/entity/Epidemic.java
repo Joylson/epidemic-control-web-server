@@ -1,11 +1,6 @@
 package br.com.epidemic.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,21 +24,20 @@ public class Epidemic {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@Column(name = "nome", length = 50, nullable = false)
-	private String nome;
+	private String name;
 	@Column(name = "discretion", length = 1000, nullable = false)
-	private String discretion;
+	private String description;
 	@Column(name = "origen", length = 20, nullable = false)
 	private String origen;
 	@Column(name = "scientific_name", nullable = false)
 	private String scientificName;
+	@Column(name = "symptoms", length = 1000)
+	private String symptoms;
+
 	
 	@OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-	private User user;
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "epidemic_symptom")
-	private Set<String> symptoms = new HashSet<>();
-	
+	private User user;	
 	public EpidemicDTO toDTO() {
 		ModelMapper map = new ModelMapper();
 		return map.map(this, EpidemicDTO.class);

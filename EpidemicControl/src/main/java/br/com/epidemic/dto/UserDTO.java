@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
@@ -27,9 +26,8 @@ public class UserDTO {
 	@Length(max = 30, message = "Numero maximo de caracter 30!!")
 	private String password;
 	@Length(max = 50, message = "Numero maximo de caracter 50!!")
-	private String email;
+	private String email; 
 	@CPF(message = "CPF Invalido!!")
-	@NotNull(message = "Informe o CPF!!")
 	private String cpf;
 	@Length(max = 20, message = "Numero maximo de caracter 20!!")
 	private String phone;

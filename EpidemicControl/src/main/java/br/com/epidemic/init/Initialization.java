@@ -19,7 +19,7 @@ public class Initialization implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		User user = new User();
+		/*User user = new User();
 		user.setEmail("joylsont@gmail.com");
 		user.setLogin("joylson");
 		user.setName("Joylson");
@@ -36,7 +36,7 @@ public class Initialization implements CommandLineRunner{
 		user1.addPerfil(Perfil.COPERADOR);		
 		
 		userRepository.save(user);
-		userRepository.save(user1);
+		userRepository.save(user1);*/
 	}
 
 }

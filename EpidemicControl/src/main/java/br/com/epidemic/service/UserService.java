@@ -19,10 +19,6 @@ public class UserService {
 		repository.findByLogin(user.getLogin()).ifPresent(u -> {
 			throw new BusinessException("Login ja cadastrado favor informa um novo!!");
 		});
-		
-		repository.findByCpf(user.getCpf()).ifPresent(u -> {
-			throw new BusinessException("CPF ja cadastrado favor informar um novo!!");
-		});
 
 		user.setId(0);
 		User u = repository.save(user);
